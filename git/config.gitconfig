@@ -1,0 +1,17 @@
+# Git config file for Michael Wyman
+#
+# Use this either directly or by adding the following lines to your standard .gitconfig
+#
+# [include]
+#   path = [absolute or relative path to this file]
+#
+# [core]
+#   excludesfile = [absolute or relative path to the config.gitignore next to this file]
+
+[alias]
+  st = status
+  co = checkout
+  ci = commit
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
