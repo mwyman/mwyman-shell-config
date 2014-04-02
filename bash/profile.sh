@@ -15,8 +15,11 @@ if [ -f "${CURRENT_DIR}/colors.sh" ]; then
 fi
 
 # Setup git TAB-completion and the shell prompt hooks
-if [ -f "${CURRENT_DIR}/git-completion.sh" && -f "${CURRENT_DIR}/git-prompt.sh" ]; then
+if [ -f "${CURRENT_DIR}/git-completion.sh" ]; then
   source "${CURRENT_DIR}/git-completion.sh"
+fi
+
+if [ -f "${CURRENT_DIR}/git-prompt.sh" ]; then
   source "${CURRENT_DIR}/git-prompt.sh"
 fi
 
