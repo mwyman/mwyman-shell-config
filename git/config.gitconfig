@@ -16,6 +16,7 @@
   cp = cherry-pick
   pa = add --patch
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  reconcile-unmerged = !vi $(git diff --name-status --diff-filter=U | awk '{print $2}')
 
 [push]
   default = current
