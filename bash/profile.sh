@@ -58,6 +58,7 @@ fi
 
 # Enable colorized command-line output on Mac
 export CLICOLOR=1
+export LSCOLORS=Exfxcxdxbxegedabagacad
 
 # Setup the shell prompt:
 # uname (git branch) dirname$ 
