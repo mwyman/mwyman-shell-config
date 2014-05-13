@@ -56,6 +56,9 @@ if [ -f "${CURRENT_DIR}/input.inputrc" ]; then
   INPUTRC="${CURRENT_DIR}/input.inputrc"
 fi
 
+# Enable colorized command-line output on Mac
+export CLICOLOR=1
+
 # Setup the shell prompt:
 # uname (git branch) dirname$ 
 PS1="\[${Blue}\]\u\[${BRed}\]\$(__git_ps1) \[${Purple}\]\W\[${Green}\]\$\[${Color_Off}\] "
