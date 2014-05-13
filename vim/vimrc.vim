@@ -32,6 +32,8 @@ set viewoptions=cursor,folds                      " Save cursor position and fol
 
 set wildmenu                                      " Enhanced completion
 set wildmode=list:longest                         " Tab-completion should act like shell completion.
+" set wildignorecase                                " (Case insensitive
+                                                  " completion- not supported yet)
 
 syntax on                                         " Enable syntax coloring
 
