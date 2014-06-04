@@ -19,6 +19,7 @@ set shell=sh                                      " Ensure vim always uses bash
 set scrolloff=3                                   " Add more top/bottom scroll margin
 set ttyfast lazyredraw                            " Should make drawing faster
 
+set ignorecase                                    " I really don't care about case
 set smartcase                                     " Be smart about when case sensitivity matters.
 set smarttab                                      " Only respect shiftwidth for code.
 set showcmd                                       " Show the last command.

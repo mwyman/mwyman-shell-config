@@ -15,8 +15,15 @@
   br = branch
   cp = cherry-pick
   pa = add --patch
+  ff = merge --ff-only
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   reconcile-unmerged = !vi $(git diff --name-status --diff-filter=U | awk '{print $2}')
+
+[color]
+  status = auto
+  branch = auto
+  diff = auto
+  interactive = auto
 
 [push]
   default = current
