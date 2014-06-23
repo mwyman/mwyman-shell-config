@@ -56,6 +56,9 @@ if [ -f "${CURRENT_DIR}/input.inputrc" ]; then
   INPUTRC="${CURRENT_DIR}/input.inputrc"
 fi
 
+# Exclude file extensions from bash tab-completion
+export FIGNORE=DS_Store
+
 # Enable colorized command-line output on Mac
 export CLICOLOR=1
 export LSCOLORS=Exfxcxdxbxegedabagacad
