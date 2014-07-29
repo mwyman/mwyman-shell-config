@@ -42,3 +42,7 @@ syntax on                                         " Enable syntax coloring
 set statusline=%t\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set laststatus=2
 
+" setup the runtimepath variable to insert local config
+let s:portable = expand('<sfile>:p:h')
+let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
+
