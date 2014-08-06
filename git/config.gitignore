@@ -1,6 +1,21 @@
 # Exclude VIM temporary files
+#
+# Use this either directly or by adding the following lines to your standard
+# .gitconfig.
+#
+# Please note that the paths to files should be absolute, because git will
+# understand them as being relative to each repository (otherwise).
+#
+# [include]
+#   path = [absolute path to this file]
+#
+# [core]
+#   excludesfile = [absolute path to the config.gitignore next to this file]
+
 *~
+*.un~
 *.swp
 *.swo
 .DS_Store
+*.clang-format
 
