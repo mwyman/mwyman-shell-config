@@ -1,6 +1,15 @@
 # Bash profile, to be included by the real .bash_profile or .profile
 #
 #
+# Interesting keystrokes to remember:
+#   CTRL-A/CTRL-E move cursor to beginning/end of the line
+#   CTRL-U/CTRL-K delete from cursor to beginning/end of the line
+#
+# Use !! to resue last command
+# Use !$ to reuse last item in last command (cat TODO.txt; rm !$)
+# use !100 to execute the 100th item in the command history
+#
+# Copy/paste to/from the Mac clipboard with pbcopy/pbpaste
 
 CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
@@ -62,6 +71,11 @@ export FIGNORE=DS_Store:un~
 # Enable colorized command-line output on Mac
 export CLICOLOR=1
 export LSCOLORS=Exfxcxdxbxegedabagacad
+
+# Add bindings to up/down keys to enable searching history:
+# $ ssh <up> # will search history for ssh calls.
+bind '"\e[A":history-search-backward'   # up arrow key
+bind '"\e[B":history-search-forward'    # down arrow key
 
 # Setup the shell prompt:
 # uname (git branch) dirname$ 
