@@ -11,73 +11,91 @@
 #
 # Copy/paste to/from the Mac clipboard with pbcopy/pbpaste
 
-CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
+realpath() {
+  # Catch this result by using $() or ``.
+  python -c 'import os.path, sys; print os.path.abspath(sys.argv[1])' $1
+}
 
-# Include our aliases
-if [ -f "${CURRENT_DIR}/alias.sh" ]; then
-  source "${CURRENT_DIR}/alias.sh"
-fi
+# Wrap the setup logic inside a function, enabling us to hide temporary
+# variables using 'local'.
+github_setup() {
+  local CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
+  local BIN_DIR=$(realpath "${CURRENT_DIR}/../bin")
 
-# Bring in our color definitions
-if [ -f "${CURRENT_DIR}/colors.sh" ]; then
-  source "${CURRENT_DIR}/colors.sh"
-fi
+  # Add our scripts/bin dir to the path
+  if [ -d "${BIN_DIR}" ]; then
+    export PATH=${PATH}:${BIN_DIR}
+  fi
 
-# Setup git TAB-completion and the shell prompt hooks
-# Attempt to use Xcode's built-in completion (may be newer)
-if [ -n "$(which xcode-select)" ]; then
-  XCODE_DIR=$(xcode-select --print-path)
+  # Include our aliases
+  if [ -f "${CURRENT_DIR}/alias.sh" ]; then
+    source "${CURRENT_DIR}/alias.sh"
+  fi
 
-  GIT_COMPLETION_SH="${XCODE_DIR}/usr/share/git-core/git-completion.bash"
-  GIT_PROMPT_SH="${XCODE_DIR}/usr/share/git-core/git-prompt.sh"
-else
-  GIT_COMPLETION_SH="${CURRENT_DIR}/git-completion.sh"
-  GIT_PROMPT_SH="${CURRENT_DIR}/git-prompt.sh"
-fi
+  # Bring in our color definitions
+  if [ -f "${CURRENT_DIR}/colors.sh" ]; then
+    source "${CURRENT_DIR}/colors.sh"
+  fi
 
-if [ -f "${GIT_COMPLETION_SH}" ]; then
-  source "${GIT_COMPLETION_SH}"
-fi
+  # Setup git TAB-completion and the shell prompt hooks
+  # Attempt to use Xcode's built-in completion (may be newer)
+  if [ -n "$(which xcode-select)" ]; then
+    local XCODE_DIR=$(xcode-select --print-path)
 
-if [ -f "${GIT_PROMPT_SH}" ]; then
-  source "${GIT_PROMPT_SH}"
+    local GIT_COMPLETION_SH="${XCODE_DIR}/usr/share/git-core/git-completion.bash"
+    local GIT_PROMPT_SH="${XCODE_DIR}/usr/share/git-core/git-prompt.sh"
+  else
+    local GIT_COMPLETION_SH="${CURRENT_DIR}/git-completion.sh"
+    local GIT_PROMPT_SH="${CURRENT_DIR}/git-prompt.sh"
+  fi
 
-  # Show unsaged ('*') and staged ('+') file status in the prompt
-  export GIT_PS1_SHOWDIRTYSTATE=1
+  if [ -f "${GIT_COMPLETION_SH}" ]; then
+    source "${GIT_COMPLETION_SH}"
+  fi
 
-  # Show '$' if the stash is non-empty
-  export GIT_PS1_SHOWSTASHSTATE=1
+  if [ -f "${GIT_PROMPT_SH}" ]; then
+    source "${GIT_PROMPT_SH}"
 
-  # Show untracked (%) file status in the prompt
-  export GIT_PS1_SHOWUNTRACKEDFILES=1
+    # Show unsaged ('*') and staged ('+') file status in the prompt
+    export GIT_PS1_SHOWDIRTYSTATE=1
 
-  # Show the difference between HEAD and its upstream, with
-  # a '<' indicating you're behind, '>' indicating you're ahead.
-  # A '<>' indicates divergence and '=' indicating no difference.
-  #export GIT_PS1_SHOWUPSTREAM="auto"
+    # Show '$' if the stash is non-empty
+    export GIT_PS1_SHOWSTASHSTATE=1
 
-  # Show color hints
-  #export GIT_PS1_SHOWCOLORHINTS=1
-fi
+    # Show untracked (%) file status in the prompt
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
 
-# Make sure our TAB-completion in BASH is case-insensitive
-if [ -f "${CURRENT_DIR}/input.inputrc" ]; then
-  INPUTRC="${CURRENT_DIR}/input.inputrc"
-fi
+    # Show the difference between HEAD and its upstream, with
+    # a '<' indicating you're behind, '>' indicating you're ahead.
+    # A '<>' indicates divergence and '=' indicating no difference.
+    #export GIT_PS1_SHOWUPSTREAM="auto"
 
-# Exclude file extensions from bash tab-completion (Mac DS_Store and vim undo)
-export FIGNORE=DS_Store:un~
+    # Show color hints
+    #export GIT_PS1_SHOWCOLORHINTS=1
+  fi
 
-# Enable colorized command-line output on Mac
-export CLICOLOR=1
-export LSCOLORS=Exfxcxdxbxegedabagacad
+  # Make sure our TAB-completion in BASH is case-insensitive
+  if [ -f "${CURRENT_DIR}/input.inputrc" ]; then
+    export INPUTRC="${CURRENT_DIR}/input.inputrc"
+  fi
 
-# Add bindings to up/down keys to enable searching history:
-# $ ssh <up> # will search history for ssh calls.
-bind '"\e[A":history-search-backward'   # up arrow key
-bind '"\e[B":history-search-forward'    # down arrow key
+  # Exclude file extensions from bash tab-completion (Mac DS_Store and vim undo)
+  export FIGNORE=DS_Store:un~
 
-# Setup the shell prompt:
-# uname (git branch) dirname$ 
-PS1="\[${Blue}\]\u\[${BRed}\]\$(__git_ps1) \[${Purple}\]\W\[${Green}\]\$\[${Color_Off}\] "
+  # Enable colorized command-line output on Mac
+  export CLICOLOR=1
+  export LSCOLORS=Exfxcxdxbxegedabagacad
+
+  # Add bindings to up/down keys to enable searching history:
+  # $ ssh <up> # will search history for ssh calls.
+  bind '"\e[A":history-search-backward'   # up arrow key
+  bind '"\e[B":history-search-forward'    # down arrow key
+
+  # Setup the shell prompt:
+  # uname (git branch) dirname$ 
+  export PS1="\[${Blue}\]\u\[${BRed}\]\$(__git_ps1) \[${Purple}\]\W\[${Green}\]\$\[${Color_Off}\] "
+}
+
+# Perform the actual setup
+github_setup
 
