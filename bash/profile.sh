@@ -20,11 +20,15 @@ realpath() {
 # variables using 'local'.
 github_setup() {
   local CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
-  local BIN_DIR=$(realpath "${CURRENT_DIR}/../bin")
 
-  # Add our scripts/bin dir to the path
-  if [ -d "${BIN_DIR}" ]; then
-    export PATH=${PATH}:${BIN_DIR}
+  # Have a global shell variable indicating where this shell is setup.
+  export MW_GITHUB_SHELL=$(realpath "${CURRENT_DIR}/..")
+
+  if [ -d "${MW_GITHUB_SHELL}/bin" ]; then
+    # Add our github-based scripts/bin dir to the path, appending it so that
+    # we don't find ourselves somehow entirely borking our shell by commiting
+    # something stupid somewhere.
+    export PATH=${PATH}:${MW_GITHUB_SHELL}/bin
   fi
 
   # Include our aliases
