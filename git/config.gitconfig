@@ -21,8 +21,9 @@
   pa = add --patch
   ff = merge --ff-only
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  reconcile-unmerged = !vi $(git diff --name-status --diff-filter=U | awk '{print $2}')
-  edit-modified = !vi $(git diff --name-status --diff-filter=M | awk '{print $2}')
+  reconcile-unmerged = !vi $(git diff --name-only --diff-filter=U)
+  edit-modified = !vi $(git diff --name-only --diff-filter=M)
+  show-repo-root = rev-parse --show-toplevel
 
 [color]
   status = auto
