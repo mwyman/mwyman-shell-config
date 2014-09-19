@@ -7,8 +7,11 @@ set nu                                            " Show newlines
 set shiftwidth=4                                  " Ensure the shiftwidth=4
 set tabstop=4                                     " Ensure the tabstop=4
 set expandtab                                     " I hate tabs
-hi ColorColumn ctermbg=7
-let &colorcolumn="80,".join(range(100,999), ",")  " Make sure I know where columns 80 and 100 are.
+
+if version >= 703
+  hi ColorColumn ctermbg=7
+  let &colorcolumn="80,".join(range(100,999), ",")  " Make sure I know where columns 80 and 100 are.
+endif
 
 set nocompatible                                  " Avoid some legacy vim sillyness
 set backspace=indent,eol,start                    " Better backspace behavior
@@ -28,7 +31,10 @@ set showmatch                                     " When a bracket is typed, sho
 set incsearch                                     " Search incrementally as I type.
 set hlsearch                                      " Highlight search terms as I type.
 
-set undofile                                      " Save undo history across sessions.
+if version >= 703
+  set undofile                                    " Save undo history across sessions.
+endif
+
 set viewoptions=cursor,folds                      " Save cursor position and folds.
 
 set wildmenu                                      " Enhanced completion
