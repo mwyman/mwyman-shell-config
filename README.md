@@ -15,7 +15,7 @@ Please keep the "Begin"/"End" comments in the files, as there may be an automate
 
 Add the following lines to your `.bashrc`, `.bash_profile`, or `.profile` file (depending on your system):
 
-```
+```bash
 # Begin Github shell config
 # Setup my preferred bash settings (based on my github branch).
 export GITHUB_SHELL_CONFIG=${HOME}/.github-shell-setup
@@ -29,7 +29,7 @@ fi
 
 Add the following lines to your `~/.vimrc` file:
 
-```
+```vim
 " Begin Github vim config
 so ${GITHUB_SHELL_CONFIG}/vim/vimrc.vim
 " End Github vim config
@@ -39,7 +39,7 @@ so ${GITHUB_SHELL_CONFIG}/vim/vimrc.vim
 
 Add the following lines to your `~/.gitconfig` file (please note that it does not seem that Git yet supports `${HOME}` or other environment variables in the config).
 
-```
+```ini
 # Begin Github git config
 [include]
   path = <_path to repo_>/git/config.gitconfig
