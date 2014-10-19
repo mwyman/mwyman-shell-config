@@ -3,10 +3,14 @@
 "
 " so <path-to-this-file>
 
+let mapleader = ","                               " Make the leader key be sane
+
 set nu                                            " Show newlines
 set shiftwidth=4                                  " Ensure the shiftwidth=4
 set tabstop=4                                     " Ensure the tabstop=4
 set expandtab                                     " I hate tabs
+
+set hidden                                        " Make buffers work right (change without requiring writing)
 
 if version >= 703
   hi ColorColumn ctermbg=7
@@ -44,9 +48,18 @@ set wildmode=list:longest                         " Tab-completion should act li
 
 syntax on                                         " Enable syntax coloring
 
-" Create a kick-ass statusline
+" Make the current directory always match the content of the active buffer
+set autochdir
+
+" Catch trailing whitespace, enabled with ,s
+set listchars=tab:>-,trail:·,eol:$
+nmap <silent> <leader>s :set nolist!<CR>
+
+" Create a kick-ass statusline (this will be useful on systems that can't run
+" vim-airline).
 set statusline=%t\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set laststatus=2
+
 
 " setup the runtimepath variable to insert local config
 let s:portable = expand('<sfile>:p:h')
@@ -63,4 +76,22 @@ autocmd FileType python setlocal completeopt-=preview   " disable auto-doc windo
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
+
+
+" Buffer movement commands
+
+" ,N will open empty buffer
+nmap <leader>N :enew<CR> 
+
+" ,n will move to the next buffer
+nmap <leader>n :bnext<CR>
+
+" ,p will move to the previous buffer
+nmap <leader>p :bprevious<CR>
+
+" ,bq will close the current buffer and move to the previous one
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" ,bl will show all open buffers and their status
+nmap <leader>bl :ls<CR>
 
