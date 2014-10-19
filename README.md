@@ -20,9 +20,20 @@ fi
 
 ## Vim
 
-Add the following lines to your `.vimrc` file:
+Add the following lines to your `~/.vimrc` file:
 
 ```
-so <_path to repo_>/vim/vimrc.vim
+so ${GITHUB_CONFIG}/vim/vimrc.vim
 ```
 
+## Git
+
+Add the following lines to your `~/.gitconfig` file (please note that it does not seem that Git yet supports `${HOME}` or other environment variables in the config).
+
+```
+[include]
+  path = <_path to repo_>/git/config.gitconfig
+
+[core]
+  excludesfile = <_path to repo_>/git/config.gitignore
+```
