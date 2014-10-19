@@ -52,3 +52,15 @@ set laststatus=2
 let s:portable = expand('<sfile>:p:h')
 let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
 
+" Pathogen
+execute pathogen#infect()
+call pathogen#helptags()    " generate helptags for everything in 'runtimepath'
+filetype plugin indent on
+
+" jedi-vim
+autocmd FileType python setlocal completeopt-=preview   " disable auto-doc window appearing
+"let g:jedi#completions_enabled = 0                     " uncomment to disable completion
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+
