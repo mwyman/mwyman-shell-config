@@ -7,10 +7,10 @@ setup.
 
 # Automated Setup
 
-To configure your shell, it is recommended to use the following script:
+To configure your shell, it is recommended to use the following script (change "mwyman-shell-config" to be whatever path you might have cloned into):
 
 ```bash
-$> .github-shell-setup/setup.py
+$> mwyman-shell-config/setup.py
 ```
 
 # Manual Setup
@@ -26,7 +26,7 @@ Add the following lines to your `.bashrc`, `.bash_profile`, or `.profile` file (
 ```bash
 # Begin Github shell config
 # Setup my preferred bash settings (based on my github branch).
-export GITHUB_SHELL_CONFIG=${HOME}/.github-shell-setup
+export GITHUB_SHELL_CONFIG=${HOME}/mwyman-shell-config
 if [ -e "${GITHUB_SHELL_CONFIG}/bash/profile.sh" ]; then
   source "${GITHUB_SHELL_CONFIG}/bash/profile.sh"
 fi
