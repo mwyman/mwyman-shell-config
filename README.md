@@ -12,6 +12,7 @@ To configure your shell, it is recommended to use the following script (change "
 ```bash
 $> GITHUB_SHELL_DEST=${HOME}/.mwyman-shell-config
 $> git clone https://github.com/mwyman/mwyman-shell-config.git ${GITHUB_SHELL_DEST}
+$> (cd ${GITHUB_SHELL_DEST}; git submodule init; git submodule update)
 $> ${GITHUB_SHELL_DEST}/setup.py
 ```
 
