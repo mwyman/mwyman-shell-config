@@ -5,7 +5,15 @@ I've needed to recreate my bash shell profile more often than I care to, and
 decided that I should really setup a Github repo that would contain my shell
 setup.
 
-# Setup
+# Automated Setup
+
+To configure your shell, it is recommended to use the following script:
+
+```bash
+$> .github-shell-setup/setup.py
+```
+
+# Manual Setup
 
 To configure your shell to use the Github configuration, add the following lines to the various configuration files.
 

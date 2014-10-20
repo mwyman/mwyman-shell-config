@@ -1,0 +1,4 @@
+%% marker: " <> Github vim config
+%% file: ~/.vimrc
+so ${GITHUB_SHELL_CONFIG}/%%CONFIG_RELPATH%%/vimrc.vim
+

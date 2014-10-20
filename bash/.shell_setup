@@ -1,0 +1,10 @@
+%% marker: # <> Github shell config
+%% file: ~/.bash_profile
+%% file: ~/.bashrc
+%% file: ~/.profile
+
+export GITHUB_SHELL_CONFIG=%%CONFIG_ROOT_RELATIVE%%
+if [ -e "${GITHUB_SHELL_CONFIG}/%%CONFIG_RELPATH%%/profile.sh" ]; then
+  source "${GITHUB_SHELL_CONFIG}/%%CONFIG_RELPATH%%/profile.sh"
+fi
+

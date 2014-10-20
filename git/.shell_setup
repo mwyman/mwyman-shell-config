@@ -1,0 +1,6 @@
+%% marker: # <> Github git config
+%% file: ~/.gitconfig
+[include]
+	path = %%CONFIG_ROOT%%/%%CONFIG_RELPATH%%/config.gitconfig
+[core]
+	excludesfile = %%CONFIG_ROOT%%/%%CONFIG_RELPATH%%/config.gitignore
