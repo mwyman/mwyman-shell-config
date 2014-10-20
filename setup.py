@@ -90,11 +90,8 @@ def UpdateFile(path, contentLines, marker):
     outlines.extend(contentLines)
     outlines.append(endComment)
 
-#  print 'Configuring %s' % (path)
-#  sys.stdout.writelines(outlines)
-#  print ''
-  #with open(path, 'w') as fp:
-  #  fp.writelines(outlines)
+  with open(path, 'w') as fp:
+    fp.writelines(outlines)
 
 
 def FindConfigs(configName='.shell_setup'):
