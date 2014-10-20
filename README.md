@@ -7,10 +7,12 @@ setup.
 
 # Automated Setup
 
-To configure your shell, it is recommended to use the following script (change "mwyman-shell-config" to be whatever path you might have cloned into):
+To configure your shell, it is recommended to use the following script (change "mwyman-shell-config" to be whatever path you want):
 
 ```bash
-$> mwyman-shell-config/setup.py
+$> GITHUB_SHELL_DEST=${HOME}/.mwyman-shell-config
+$> git clone https://github.com/mwyman/mwyman-shell-config.git ${GITHUB_SHELL_DEST}
+$> ${GITHUB_SHELL_DEST}/setup.py
 ```
 
 # Manual Setup
