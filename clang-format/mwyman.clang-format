@@ -1,60 +1,18 @@
 # Aimed at Clang 3.6's clang-format (compiled from source)
 ---
 Language:        Cpp
-# BasedOnStyle:  Google
-AccessModifierOffset: -1
-ConstructorInitializerIndentWidth: 4
-AlignEscapedNewlinesLeft: true
-AlignTrailingComments: true
-AllowAllParametersOfDeclarationOnNextLine: true
-AllowShortBlocksOnASingleLine: false
-AllowShortIfStatementsOnASingleLine: true
-AllowShortLoopsOnASingleLine: true
-AllowShortFunctionsOnASingleLine: All
-AlwaysBreakAfterDefinitionReturnType: false
-AlwaysBreakTemplateDeclarations: true
-AlwaysBreakBeforeMultilineStrings: true
-BreakBeforeBinaryOperators: false
-BreakBeforeTernaryOperators: true
-BreakConstructorInitializersBeforeComma: false
-BinPackParameters: true
+BasedOnStyle:  Google
+AllowShortCaseLabelsOnASingleLine: true
 ColumnLimit:     100
-ConstructorInitializerAllOnOneLineOrOnePerLine: true
 DerivePointerAlignment: false
-ExperimentalAutoDetectBinPacking: false
-IndentCaseLabels: true
-IndentWrappedFunctionNames: false
-IndentFunctionDeclarationAfterType: false
 MaxEmptyLinesToKeep: 2
-KeepEmptyLinesAtTheStartOfBlocks: false
-NamespaceIndentation: None
-ObjCBlockIndentWidth: 2
 ObjCSpaceAfterProperty: true
 ObjCSpaceBeforeProtocolList: true
-PenaltyBreakBeforeFirstCallParameter: 1
-PenaltyBreakComment: 300
-PenaltyBreakString: 1000
-PenaltyBreakFirstLessLess: 120
-PenaltyExcessCharacter: 1000000
-PenaltyReturnTypeOnItsOwnLine: 200
 PointerAlignment: Right
-SpacesBeforeTrailingComments: 2
-Cpp11BracedListStyle: true
-Standard:        Auto
-IndentWidth:     4
-TabWidth:        8
+# Oh dear god, I'm getting used to Google's 2-space indent!
+# IndentWidth:     4
+IndentWidth:     2
 UseTab:          Never
-BreakBeforeBraces: Attach
-SpacesInParentheses: true
-SpacesInAngles:  false
-SpaceInEmptyParentheses: false
-SpacesInCStyleCastParentheses: false
-SpacesInContainerLiterals: true
-SpaceBeforeAssignmentOperators: true
-ContinuationIndentWidth: 4
-CommentPragmas:  '^ IWYU pragma:'
-ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
-SpaceBeforeParens: ControlStatements
-DisableFormat:   false
+#SpacesInParentheses: true
 ...
 
