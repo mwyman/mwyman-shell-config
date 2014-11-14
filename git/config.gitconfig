@@ -25,6 +25,7 @@
   hist-after = "!sh -c \"git --no-pager hist-nograph | sed '/^$1/{\nq\n}' | less -S -X\" -"
   reconcile-unmerged = !vi $(git diff --name-only --diff-filter=U)
   edit-modified = !git diff --name-only --diff-filter=M | tr '\\n' '\\0' | xargs -0 -o vi
+  add-modified = !git diff --name-only --diff-filter=M | tr '\\n' '\\0' | xargs -0 git add
   show-repo-root = rev-parse --show-toplevel
 
 [color]
