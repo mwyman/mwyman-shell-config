@@ -29,6 +29,7 @@ def ParseConfig(path):
   vardict = dict()
   vardict['CONFIG_ROOT'] = GITHUB_SHELL_PATH
   vardict['CONFIG_ROOT_RELATIVE'] = GITHUB_SHELL_RELPATH
+  vardict['CONFIG_ABSPATH'] = os.path.dirname(os.path.realpath(path))
   vardict['CONFIG_RELPATH'] = os.path.relpath(
       os.path.dirname(os.path.realpath(path)),
       GITHUB_SHELL_PATH)
@@ -55,7 +56,7 @@ def ParseConfig(path):
   return { 'marker': marker, 'files': files, 'contents': contents }
 
 
-def UpdateFile(path, contentLines, marker):
+def UpdateFile(path, contentLines, marker, dryrun=False):
   """
   Update the given file with the provided config lines.
   """
@@ -90,8 +91,13 @@ def UpdateFile(path, contentLines, marker):
     outlines.extend(contentLines)
     outlines.append(endComment)
 
-  with open(path, 'w') as fp:
-    fp.writelines(outlines)
+  if dryrun:  # Write to standard output instead
+    print 'Update %s:' % (path)
+    sys.stdout.writelines(outlines)
+    print '\n\n'
+  else:
+    with open(path, 'w') as fp:
+      fp.writelines(outlines)
 
 
 def FindConfigs(configName='.shell_setup'):
@@ -103,6 +109,11 @@ def FindConfigs(configName='.shell_setup'):
 
 
 def main():
+  import argparse
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--dry-run", action="store_true",
+                      help="print to the terminal instead of writing to the files")
+  args = parser.parse_args()
 
   for configFile in FindConfigs():
     config = ParseConfig(configFile)
@@ -115,7 +126,7 @@ def main():
 
     for path in files:
       if os.path.exists(ExpandAll(path)):
-        UpdateFile(path, contents, marker)
+        UpdateFile(path, contents, marker, dryrun=args.dry_run)
 
 
 if __name__ == '__main__':
