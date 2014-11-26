@@ -14,7 +14,7 @@ set hidden                                        " Make buffers work right (cha
 
 if version >= 703
   hi ColorColumn ctermbg=7
-  let &colorcolumn="80,".join(range(100,999), ",")  " Make sure I know where columns 80 and 100 are.
+  let &colorcolumn="80,".join(range(100,&columns), ",")  " Make sure I know where columns 80 and 100 are.
 endif
 
 set nocompatible                                  " Avoid some legacy vim sillyness
