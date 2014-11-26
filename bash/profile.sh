@@ -103,3 +103,6 @@ github_setup() {
 # Perform the actual setup
 github_setup
 
+# Cleanup (no reason for the function to linger in the global namespace)
+unset -f github_setup
+
