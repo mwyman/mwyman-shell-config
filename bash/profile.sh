@@ -19,6 +19,7 @@ realpath() {
 # Wrap the setup logic inside a function, enabling us to hide temporary
 # variables using 'local'.
 github_setup() {
+  local CURRENT_OS=$(uname)
   local CURRENT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
   # Have a global shell variable indicating where this shell is setup.
@@ -92,8 +93,10 @@ github_setup() {
 
   # Add bindings to up/down keys to enable searching history:
   # $ ssh <up> # will search history for ssh calls.
-  bind '"\e[A":history-search-backward'   # up arrow key
-  bind '"\e[B":history-search-forward'    # down arrow key
+  if [ "${CURRENT_OS}" == "Darwin" ]; then
+    bind '"\e[A":history-search-backward'   # up arrow key
+    bind '"\e[B":history-search-forward'    # down arrow key
+  fi
 
   # Setup the shell prompt:
   # uname (git branch) dirname$ 
