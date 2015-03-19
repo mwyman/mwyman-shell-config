@@ -9,3 +9,6 @@ else
   alias ls="ls -F"
 fi
 
+# I type too fast, and always seem to mistype 'git':
+alias {gti,itg,igt,tgi,tig}=git
+

@@ -24,7 +24,9 @@
   hist-nograph = log --pretty=format:\"%h %ad | %s%d [%an]\" --date=short
   hist-after = "!sh -c \"git --no-pager hist-nograph | sed '/^$1/{\nq\n}' | less -S -X\" -"
   reconcile-unmerged = !vi $(git diff --name-only --diff-filter=U)
+  # Open the modified files, searching for diff locations.
   edit-modified = !git diff --name-only --diff-filter=M | tr '\\n' '\\0' | xargs -0 -o vi
+  edit-conflicts = !git diff --name-only --diff-filter=M | tr '\\n' '\\0' | xargs -0 -o vi '+/\\(<<<<\\|>>>>\\|====\\)'
   add-modified = !git diff --name-only --diff-filter=M | tr '\\n' '\\0' | xargs -0 git add
   show-repo-root = rev-parse --show-toplevel
 
