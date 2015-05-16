@@ -6,8 +6,8 @@
 let mapleader = ","                               " Make the leader key be sane
 
 set nu                                            " Show newlines
-set shiftwidth=4                                  " Ensure the shiftwidth=4
-set tabstop=4                                     " Ensure the tabstop=4
+set shiftwidth=2                                  " Ensure the shiftwidth=4
+set tabstop=2                                     " Ensure the tabstop=4
 set expandtab                                     " I hate tabs
 
 set hidden                                        " Make buffers work right (change without requiring writing)
