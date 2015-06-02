@@ -20,8 +20,8 @@
   cp = cherry-pick
   pa = add --patch
   ff = merge --ff-only
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  hist-nograph = log --pretty=format:\"%h %ad | %s%d [%an]\" --date=short
+  hist = log --pretty=format:\"%C(green bold)%h%Creset %C(yellow dim)%ad%Creset %C(red bold)|%Creset %s%d [%C(blue dim)%aN%Creset]\" --graph --date=short
+  hist-nograph = log --pretty=format:\"%C(green bold)%h%Creset %C(yellow dim)%ad%Creset %C(red bold)|%Creset %s%d [%C(blue dim)%aN%Creset]\" --date=short
   hist-after = "!sh -c \"git --no-pager hist-nograph | sed '/^$1/{\nq\n}' | less -S -X\" -"
   reconcile-unmerged = !vi $(git diff --name-only --diff-filter=U)
   # Open the modified files, searching for diff locations.
