@@ -3,6 +3,7 @@
 "
 " so <path-to-this-file>
 
+set encoding=utf-8
 let mapleader = ","                               " Make the leader key be sane
 
 set nu                                            " Show newlines
