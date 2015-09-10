@@ -16,6 +16,24 @@ realpath() {
   python -c 'import os.path, sys; print os.path.abspath(sys.argv[1])' $1
 }
 
+# Function/command to change to the current git repo "project" directory.
+cdproj() {
+  local GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || git config mjw.default-repo-root)
+  if [ -n "${GIT_ROOT}" ]; then
+    local PROJECT_ROOT=$(cd ${GIT_ROOT}; git config mjw.project-root)
+    if [ -n "${PROJECT_ROOT}" ]; then
+      cd "${GIT_ROOT}/${PROJECT_ROOT}"
+    else
+      echo "No project root in '${GIT_ROOT}'. Run 'git config --local mjw.project-root <relative dir>' to set."
+    fi
+  else
+    echo "No default git repo setup. Run 'git config --global mjw.default-repo-root <absolute dir>' to set."
+  fi
+}
+
+# Command alias to change to the current toplevel of a git repository.
+alias cdroot="git rev-parse --show-toplevel >/dev/null && cd \$(git rev-parse --show-toplevel)"
+
 # Wrap the setup logic inside a function, enabling us to hide temporary
 # variables using 'local'.
 github_setup() {
