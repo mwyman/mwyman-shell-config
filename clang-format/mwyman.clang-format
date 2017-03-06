@@ -2,16 +2,19 @@
 ---
 Language:        Cpp
 BasedOnStyle:  Google
+BreakBeforeTernaryOperators: true
+AlignTrailingComments: false
 AllowShortCaseLabelsOnASingleLine: true
 ColumnLimit:     100
 DerivePointerAlignment: false
 MaxEmptyLinesToKeep: 2
-ObjCSpaceAfterProperty: true
+#ObjCSpaceAfterProperty: true
 ObjCSpaceBeforeProtocolList: true
 PointerAlignment: Right
 # Oh dear god, I'm getting used to Google's 2-space indent!
 # IndentWidth:     4
 IndentWidth:     2
+TabWidth: 2
 UseTab:          Never
 #SpacesInParentheses: true
 ...
