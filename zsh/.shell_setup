@@ -1,0 +1,8 @@
+%% marker: # <> Github shell config
+%% file: ~/.zshrc
+
+export GITHUB_SHELL_CONFIG=%%CONFIG_ROOT_RELATIVE%%
+if [ -e "${GITHUB_SHELL_CONFIG}/%%CONFIG_RELPATH%%/zshrc.sh" ]; then
+  source "${GITHUB_SHELL_CONFIG}/%%CONFIG_RELPATH%%/zshrc.sh"
+fi
+
