@@ -101,7 +101,6 @@ github_setup() {
   fi
 
   # Check for oh-my-zsh installation.
-  echo "${CURRENT_DIR}"
   if [ -n "${OH_MY_ZSH_PATH}" ]; then
     export ZSH="${OH_MY_ZSH_PATH}"
   elif [ -f "${CURRENT_DIR}/oh-my-zsh/oh-my-zsh.sh" ]; then
