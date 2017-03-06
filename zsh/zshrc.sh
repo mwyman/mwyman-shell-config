@@ -83,7 +83,7 @@ plugins=(git mercurial osx)
 
 github_setup() {
   local CURRENT_OS=$(uname)
-  local CURRENT_DIR=$(dirname "${(%):-%N}")
+  local CURRENT_DIR=$(dirname "${(%):-%x}")
 
   # Have a global shell variable indicating where this shell is setup.
   export MW_GITHUB_SHELL=$(realpath "${CURRENT_DIR}/..")
@@ -101,11 +101,14 @@ github_setup() {
   fi
 
   # Check for oh-my-zsh installation.
+  echo "${CURRENT_DIR}"
   if [ -n "${OH_MY_ZSH_PATH}" ]; then
-    source "${OH_MY_ZSH_PATH}/oh-my-zsh.sh"
+    export ZSH="${OH_MY_ZSH_PATH}"
   elif [ -f "${CURRENT_DIR}/oh-my-zsh/oh-my-zsh.sh" ]; then
-    source "${CURRENT_DIR}/oh-my-zsh/oh-my-zsh.sh"
+    export ZSH="${CURRENT_DIR}/oh-my-zsh"
   fi
+
+  source "${ZSH}/oh-my-zsh.sh"
 }
 
 # Perform the actual setup.
@@ -114,3 +117,20 @@ github_setup
 # Cleanup (no reason for the function to linger in the global namespace).
 unset -f github_setup
 
+## Fix up some agnoster themes for light viewing:
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment default default "%(!.%{%F{yellow}%}.)$USER@%m"
+  fi
+}
+
+prompt_dir() {
+  prompt_segment cyan black '%~'
+}
+
+prompt_virtualenv() {
+  local virtualenv_path="$VIRTUAL_ENV"
+  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
+    prompt_segment cyan black "(`basename $virtualenv_path`)"
+  fi
+}
