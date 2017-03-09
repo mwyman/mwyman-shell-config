@@ -13,10 +13,10 @@ set expandtab                                     " I hate tabs
 
 set hidden                                        " Make buffers work right (change without requiring writing)
 
-if version >= 703
-  hi ColorColumn ctermbg=7
-  let &colorcolumn="80,".join(range(100,&columns), ",")  " Make sure I know where columns 80 and 100 are.
-endif
+"if version >= 703
+"  hi ColorColumn ctermbg=7
+"  let &colorcolumn="80,".join(range(100,&columns), ",")  " Make sure I know where columns 80 and 100 are.
+"endif
 
 set nocompatible                                  " Avoid some legacy vim sillyness
 set backspace=indent,eol,start                    " Better backspace behavior
@@ -71,22 +71,27 @@ execute pathogen#infect()
 call pathogen#helptags()    " generate helptags for everything in 'runtimepath'
 filetype plugin indent on
 
+" Set using solarized fonts.
+syntax enable
+set background=light
+colorscheme solarized
+
 " jedi-vim
 autocmd FileType python setlocal completeopt-=preview   " disable auto-doc window appearing
 "let g:jedi#completions_enabled = 0                     " uncomment to disable completion
 
 " vim-airline
-let g:airline_powerline_fonts = 0                       " make sure powerline fonts are disabled
+let g:airline_powerline_fonts = 1                       " make sure powerline fonts are disabled
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '»'
-let g:airline_right_sep = '«'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.linenr = '␊'
+"if !exists('g:airline_symbols')
+"  let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep = '»'
+"let g:airline_right_sep = '«'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.linenr = '␊'
 
 
 " Buffer movement commands
