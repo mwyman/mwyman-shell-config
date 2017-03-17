@@ -65,7 +65,7 @@ cdproj() {
   _cd_git_project "$(git config --global mjw.default-repo-root)"
   if [ $? -eq 0 ]; then return 0; fi
 
-  _cd_hg_project "$(hg config --global mjw.default-repo-root)"
+  _cd_hg_project "$(hg config mjw.default-repo-root)"
   if [ $? -eq 0 ]; then return 0; fi
 
   return 1
