@@ -1,0 +1,28 @@
+[extensions]
+rebase =
+purge =
+pager =
+
+# Default to vimdiff merge.
+[ui]
+merge = vimdiff
+
+# Set up some handy vimdiff merging.
+[merge-tools]
+vimdiff.executable = vimdiff
+vimdiff.args = -f -d $ouput -M $local $base $other -c "wincmd J" -c "set modifiable" -c "set write"
+vimdiff.premerge = keep
+
+# Default aliases
+[alias]
+hist = ll
+clang-format = !hg diff -U0 --noprefix | clang-format-diff.py -i -style "{BasedOnStyle: Google, ColumnLimit: 100}"
+
+[pager]
+pager = LESS='FRX' less
+
+# Have some global ignored files.
+[ignore]
+github-shared = config.hgignored
+
+

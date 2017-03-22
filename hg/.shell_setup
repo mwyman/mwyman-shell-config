@@ -1,0 +1,3 @@
+%% marker: # <> Github hg config
+%% file: ~/.hgrc
+%include %%CONFIG_ABSPATH%%/config.hgrc
