@@ -42,6 +42,19 @@ fi
 # End Github shell config
 ```
 
+## Zsh
+
+Add the following lines to your `.zshrc`:
+
+```bash
+# Begin Github shell config
+export GITHUB_SHELL_CONFIG=${HOME}/.mwyman-shell-config
+if [ -e "${GITHUB_SHELL_CONFIG}/zsh/zshrc.sh" ]; then
+  source "${GITHUB_SHELL_CONFIG}/zsh/zshrc.sh"
+fi
+# End Github shell cofig
+```
+
 ## Vim
 
 Add the following lines to your `~/.vimrc` file:
@@ -63,4 +76,14 @@ Add the following lines to your `~/.gitconfig` file (please note that it does no
 [core]
   excludesfile = <_path to repo_>/git/config.gitignore
 # End Github git config
+```
+
+## Mercurial
+
+Add the following lines to your `~/.hgrc` file.
+
+```ini
+# Begin Github hg config
+%include <_path to repo>/hg/config.hgrc
+# End Github hg config
 ```
