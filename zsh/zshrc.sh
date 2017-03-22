@@ -56,11 +56,32 @@ _cd_hg_project() {
 
 # Function/command to change to the current git/mercurial repo "project" directory.
 cdproj() {
-  _cd_git_project "$(_git_root_directory)"
-  if [ $? -eq 0 ]; then return 0; fi
+  local GIT_ROOT=$(_git_root_directory)
+  if [ -n "${GIT_ROOT}" ]; then
+    _cd_git_project "${GIT_ROOT}"
+    if [ $? -eq 0 ]; then
+      return 0
+    else
+      echo "No \"mjw.project-root\" defined in Git repository: ${GIT_ROOT}"
+      echo "To set, run:"
+      echo "\tgit config --add mjw.project-root <path>"
+      return 1
+    fi
+  fi
 
-  _cd_hg_project "$(_hg_root_directory)"
-  if [ $? -eq 0 ]; then return 0; fi
+  local HG_ROOT=$(_hg_root_directory)
+  if [ -n "${HG_ROOT}" ]; then
+    _cd_hg_project "${HG_ROOT}"
+    if [ $? -eq 0 ]; then
+      return 0
+    else
+      echo "No \"mjw.project-root\" defined in Mercurial repository: ${HG_ROOT}"
+      echo "To set, run \"hg config --local --edit\" and add:"
+      echo "\t[mjw]"
+      echo "\tproject-root = <path>"
+      return 1
+    fi
+  fi
 
   _cd_git_project "$(git config --global mjw.default-repo-root)"
   if [ $? -eq 0 ]; then return 0; fi
@@ -68,6 +89,7 @@ cdproj() {
   _cd_hg_project "$(hg config mjw.default-repo-root)"
   if [ $? -eq 0 ]; then return 0; fi
 
+  echo "Error: no \"mjw.default-repo-root\" defined in global Git or Mercurial configs"
   return 1
 }
 
