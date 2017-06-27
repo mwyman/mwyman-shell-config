@@ -93,6 +93,10 @@ cdproj() {
   return 1
 }
 
+alias compile_arm64='xcrun --sdk iphoneos clang -arch arm64'
+alias compile_armv7='xcrun --sdk iphoneos clang -arch armv7'
+alias compile_x64='xcrun --sdk iphonesimulator clang -arch x86_64'
+
 ###############################################################################
 # Oh-my-zsh stuff
 ###############################################################################
