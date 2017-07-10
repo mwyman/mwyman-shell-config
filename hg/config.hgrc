@@ -3,9 +3,9 @@ rebase =
 purge =
 pager =
 
-# Default to vimdiff merge.
-[ui]
-merge = vimdiff
+# Kill off the training wheels crap.
+[trainingwheels]
+revert--all=false
 
 # Set up some handy vimdiff merging.
 [merge-tools]
@@ -16,7 +16,7 @@ vimdiff.premerge = keep
 # Default aliases
 [alias]
 hist = ll
-clang-format = !hg diff -U0 --noprefix | clang-format-diff.py -i -style "{BasedOnStyle: Google, ColumnLimit: 100}"
+clang-format = !$HG diff --git -U0 | python ~/bin/clang-format-diff.py -style file -sort-includes $@
 
 [pager]
 pager = LESS='FRX' less
