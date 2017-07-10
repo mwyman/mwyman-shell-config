@@ -39,3 +39,6 @@
 
 [push]
   default = current
+
+[core]
+  pager = less -F -X
