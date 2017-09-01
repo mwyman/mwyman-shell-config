@@ -16,7 +16,8 @@ vimdiff.premerge = keep
 # Default aliases
 [alias]
 hist = ll
-clang-format = !$HG diff --git -U0 | python ~/bin/clang-format-diff.py -style file -sort-includes $@
+clang-format = !$HG diff --git -U0 | python ~/bin/clang-format-diff.py -style file $@
+reclang-format = !$HG diff -c -1 --git -U0 | python ~/bin/clang-format-diff.py -style file $@
 
 [pager]
 pager = LESS='FRX' less
