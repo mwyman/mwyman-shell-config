@@ -114,6 +114,17 @@ github_setup() {
   # Have a global shell variable indicating where this shell is setup.
   export MW_GITHUB_SHELL=$(realpath "${CURRENT_DIR}/..")
 
+  if [ -d "${HOME}/bin" ]; then
+    # Add ~/bin to the path.
+    export PATH=${PATH}:${HOME}/bin
+  fi
+
+  if [ -d "${HOME}/.homebrew" ]; then
+    # Add the user-local homebrew directory to the path.
+    export PATH=${PATH}:${HOME}/.homebrew/bin
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/.homebrew/lib
+  fi
+
   if [ -d "${MW_GITHUB_SHELL}/bin" ]; then
     # Add our github-based scripts/bin dir to the path, appending it so that
     # we don't find ourselves somehow entirely borking our shell by committing
