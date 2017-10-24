@@ -111,3 +111,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " ,bl will show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
+" ,tp will toggle the paste mode.
+nmap <leader>tp :set invpaste<CR>
+
