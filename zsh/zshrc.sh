@@ -96,6 +96,10 @@ cdproj() {
 alias compile_arm64='xcrun --sdk iphoneos clang -arch arm64'
 alias compile_armv7='xcrun --sdk iphoneos clang -arch armv7'
 alias compile_x64='xcrun --sdk iphonesimulator clang -arch x86_64'
+alias compile_swift_arm64='swiftc -sdk $(xcrun --sdk iphoneos --show-sdk-path) -target arm64-apple-ios$(xcrun --sdk iphoneos --show-sdk-platform-version)'
+alias compile_swift_armv7='swiftc -sdk $(xcrun --sdk iphoneos --show-sdk-path) -target armv7-apple-ios$(xcrun --sdk iphoneos --show-sdk-platform-version)'
+alias compile_swift_x64='swiftc -sdk $(xcrun --sdk iphonesimulator --show-sdk-path) -target x86_64-apple-ios$(xcrun --sdk iphonesimulator --show-sdk-platform-version)'
+
 
 ###############################################################################
 # Oh-my-zsh stuff
