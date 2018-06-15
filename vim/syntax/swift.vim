@@ -1,225 +1,219 @@
-" File: swift.vim
-" Author: Keith Smiley
-" Description: Runtime files for Swift
-" Last Modified: June 15, 2014
+" Vim syntax file
+" Language: swift
+" Maintainer: Joe Groff <jgroff@apple.com>
+" Last Change: 2018 Jan 21
 
 if exists("b:current_syntax")
-  finish
+    finish
 endif
 
-" Comments
-" Shebang
-syntax match swiftShebang "\v#!.*$"
-
-" Comment contained keywords
-syntax keyword swiftTodos contained TODO XXX FIXME NOTE
-syntax keyword swiftMarker contained MARK
-syntax match swiftDocString "\v^\s*-\s*parameter"hs=s+1 contained
-syntax match swiftDocString "\v^\s*-\s*returns"hs=s+1 contained
-
-" Literals
-" Strings
-syntax region swiftString start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=swiftInterpolatedWrapper
-syntax region swiftInterpolatedWrapper start="\v[^\\]\\\(\s*" end="\v\s*\)" contained containedin=swiftString contains=swiftInterpolatedString
-syntax match swiftInterpolatedString "\v\w+(\(\))?" contained containedin=swiftInterpolatedWrapper
-
-" Numbers
-syntax match swiftNumber "\v<\d+>"
-syntax match swiftNumber "\v<(\d+_+)+\d+(\.\d+(_+\d+)*)?>"
-syntax match swiftNumber "\v<\d+\.\d+>"
-syntax match swiftNumber "\v<\d*\.?\d+([Ee]-?)?\d+>"
-syntax match swiftNumber "\v<0x\x+([Pp]-?)?\x+>"
-syntax match swiftNumber "\v<0b[01]+>"
-syntax match swiftNumber "\v<0o\o+>"
-
-" BOOLs
-syntax keyword swiftBoolean
-      \ true
-      \ false
-
-
-" Operators
-syntax match swiftOperator "\v\~"
-syntax match swiftOperator "\v\s+!"
-syntax match swiftOperator "\v\%"
-syntax match swiftOperator "\v\^"
-syntax match swiftOperator "\v\&"
-syntax match swiftOperator "\v\*"
-syntax match swiftOperator "\v-"
-syntax match swiftOperator "\v\+"
-syntax match swiftOperator "\v\="
-syntax match swiftOperator "\v\|"
-syntax match swiftOperator "\v\/"
-syntax match swiftOperator "\v\."
-syntax match swiftOperator "\v\<"
-syntax match swiftOperator "\v\>"
-syntax match swiftOperator "\v\?\?"
-
-" Methods/Functions
-syntax match swiftMethod "\(\.\)\@<=\w\+\((\)\@="
-
-" Swift closure arguments
-syntax match swiftClosureArgument "\$\d\+\(\.\d\+\)\?"
-
-syntax match swiftAvailability "\v((\*(\s*,\s*[a-zA-Z="0-9.]+)*)|(\w+\s+\d+(\.\d+(.\d+)?)?\s*,\s*)+\*)" contains=swiftString
-syntax keyword swiftPlatforms OSX iOS watchOS OSXApplicationExtension iOSApplicationExtension contained containedin=swiftAvailability
-syntax keyword swiftAvailabilityArg renamed unavailable introduced deprecated obsoleted message contained containedin=swiftAvailability
-
-" Keywords {{{
-syntax keyword swiftKeywords
-      \ as
-      \ atexit
+syn keyword swiftKeyword
+      \ associatedtype
       \ break
       \ case
       \ catch
-      \ class
       \ continue
-      \ convenience
       \ default
       \ defer
-      \ deinit
-      \ didSet
       \ do
-      \ dynamic
       \ else
-      \ extension
       \ fallthrough
-      \ final
       \ for
-      \ func
-      \ get
       \ guard
       \ if
-      \ import
       \ in
-      \ indirect
-      \ infix
-      \ init
-      \ inout
-      \ internal
-      \ is
-      \ lazy
-      \ let
-      \ mutating
-      \ nil
-      \ nonmutating
-      \ operator
-      \ optional
-      \ override
-      \ postfix
-      \ prefix
-      \ private
-      \ protocol
-      \ public
       \ repeat
-      \ required
-      \ rethrows
       \ return
-      \ self
-      \ set
-      \ static
-      \ subscript
-      \ super
       \ switch
       \ throw
-      \ throws
       \ try
-      \ typealias
-      \ unowned
-      \ var
-      \ weak
       \ where
       \ while
-      \ willSet
-" }}}
+syn match swiftMultiwordKeyword
+      \ "indirect case"
 
-" Names surrounded by backticks. This aren't limited to keywords because 1)
-" Swift doesn't limit them to keywords and 2) I couldn't make the keywords not
-" highlight at the same time
-syntax region swiftEscapedReservedWord start="`" end="`" oneline
+syn keyword swiftImport skipwhite nextgroup=swiftImportModule
+      \ import
 
-syntax keyword swiftAttributes
-      \ @assignment
-      \ @autoclosure
-      \ @available
-      \ @convention
-      \ @exported
-      \ @IBAction
-      \ @IBDesignable
-      \ @IBInspectable
-      \ @IBOutlet
-      \ @noescape
-      \ @nonobjc
-      \ @noreturn
-      \ @NSApplicationMain
-      \ @NSCopying
-      \ @NSManaged
-      \ @objc
-      \ @testable
-      \ @UIApplicationMain
-      \ @warn_unused_result
+syn keyword swiftDefinitionModifier
+      \ convenience
+      \ dynamic
+      \ fileprivate
+      \ final
+      \ internal
+      \ nonmutating
+      \ open
+      \ override
+      \ private
+      \ public
+      \ required
+      \ rethrows
+      \ static
+      \ throws
+      \ weak
 
-syntax keyword swiftConditionStatement #available
+syn keyword swiftInOutKeyword skipwhite nextgroup=swiftTypeName
+      \ inout
 
-syntax keyword swiftStructure
-      \ struct
+syn keyword swiftIdentifierKeyword
+      \ Self
+      \ metatype
+      \ self
+      \ super
+
+syn keyword swiftFuncKeywordGeneral skipwhite nextgroup=swiftTypeParameters
+      \ init
+
+syn keyword swiftFuncKeyword
+      \ deinit
+      \ subscript
+
+syn keyword swiftScope
+      \ autoreleasepool
+
+syn keyword swiftMutating skipwhite nextgroup=swiftFuncDefinition
+      \ mutating
+syn keyword swiftFuncDefinition skipwhite nextgroup=swiftTypeName,swiftOperator
+      \ func
+
+syn keyword swiftTypeDefinition skipwhite nextgroup=swiftTypeName
+      \ class
       \ enum
+      \ extension
+      \ protocol
+      \ struct
+      \ typealias
 
-syntax region swiftTypeWrapper start="\v:\s*" skip="\s*,\s*$*\s*" end="$" contains=swiftString,swiftBoolean,swiftNumber,swiftType,swiftGenericsWrapper transparent
-syntax region swiftGenericsWrapper start="\v\<" end="\v\>" contains=swiftType transparent oneline
-syntax region swiftLiteralWrapper start="\v\=\s*" skip="\v[^\[\]]\(\)" end="\v(\[\]|\(\))" contains=swiftType,swiftString transparent oneline
-syntax region swiftReturnWrapper start="\v-\>\s*" end="\v(\{|$)" contains=swiftType transparent oneline
-syntax match swiftType "\v<\u\w*" contained containedin=swiftGenericsWrapper,swiftTypeWrapper,swiftLiteralWrapper,swiftGenericsWrapper
+syn match swiftMultiwordTypeDefinition skipwhite nextgroup=swiftTypeName
+      \ "indirect enum"
 
-syntax keyword swiftImports import
+syn keyword swiftVarDefinition skipwhite nextgroup=swiftVarName
+      \ let
+      \ var
 
+syn keyword swiftLabel
+      \ get
+      \ set
+      \ didSet
+      \ willSet
 
-" 'preprocesor' stuff
-syntax keyword swiftPreprocessor
-      \ #if
-      \ #elseif
-      \ #else
-      \ #endif
+syn keyword swiftBoolean
+      \ false
+      \ true
 
+syn keyword swiftNil
+      \ nil
 
-" Comment patterns
-syntax match swiftComment "\v\/\/.*$"
-      \ contains=swiftTodos,swiftDocString,swiftMarker,@Spell oneline
-syntax region swiftComment start="/\*" end="\*/"
-      \ contains=swiftTodos,swiftDocString,swiftMarker,swiftComment,@Spell fold
+syn match swiftImportModule contained nextgroup=swiftImportComponent
+      \ /\<[A-Za-z_][A-Za-z_0-9]*\>/
+syn match swiftImportComponent contained nextgroup=swiftImportComponent
+      \ /\.\<[A-Za-z_][A-Za-z_0-9]*\>/
 
+syn match swiftTypeName contained skipwhite nextgroup=swiftTypeParameters
+      \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>/
+syn match swiftVarName contained skipwhite nextgroup=swiftTypeDeclaration
+      \ /\<[A-Za-z_][A-Za-z_0-9]*\>/
+syn match swiftImplicitVarName
+      \ /\$\<[A-Za-z_0-9]\+\>/
 
-" Set highlights
-highlight default link swiftTodos Todo
-highlight default link swiftDocString String
-highlight default link swiftShebang Comment
-highlight default link swiftComment Comment
-highlight default link swiftMarker Comment
+" TypeName[Optionality]?
+syn match swiftType contained skipwhite nextgroup=swiftTypeParameters
+      \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
+" [Type:Type] (dictionary) or [Type] (array)
+syn region swiftType contained contains=swiftTypePair,swiftType
+      \ matchgroup=Delimiter start=/\[/ end=/\]/
+syn match swiftTypePair contained skipwhite nextgroup=swiftTypeParameters,swiftTypeDeclaration
+      \ /\<[A-Za-z_][A-Za-z_0-9\.]*\>[!?]\?/
+" (Type[, Type]) (tuple)
+" FIXME: we should be able to use skip="," and drop swiftParamDelim
+syn region swiftType contained contains=swiftType,swiftParamDelim
+      \ matchgroup=Delimiter start="[^@](" end=")" matchgroup=NONE skip=","
+syn match swiftParamDelim contained
+      \ /,/
+" <Generic Clause> (generics)
+syn region swiftTypeParameters contained contains=swiftVarName,swiftConstraint
+      \ matchgroup=Delimiter start="<" end=">" matchgroup=NONE skip=","
+syn keyword swiftConstraint contained
+      \ where
 
-highlight default link swiftString String
-highlight default link swiftInterpolatedWrapper Delimiter
-highlight default link swiftNumber Number
-highlight default link swiftBoolean Boolean
+syn match swiftTypeDeclaration skipwhite nextgroup=swiftType,swiftInOutKeyword
+      \ /:/
+syn match swiftTypeDeclaration skipwhite nextgroup=swiftType
+      \ /->/
 
-highlight default link swiftOperator Operator
-highlight default link swiftKeywords Keyword
-highlight default link swiftEscapedReservedWord Normal
-highlight default link swiftClosureArgument Operator
-highlight default link swiftAttributes PreProc
-highlight default link swiftConditionStatement PreProc
-highlight default link swiftStructure Structure
-highlight default link swiftType Type
-highlight default link swiftImports Include
-highlight default link swiftPreprocessor PreProc
-highlight default link swiftMethod Function
+syn region swiftString start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=swiftInterpolationRegion
+syn region swiftInterpolationRegion matchgroup=swiftInterpolation start=/\\(/ end=/)/ contained contains=TOP
+syn region swiftComment start="/\*" end="\*/" contains=swiftComment,swiftLineComment,swiftTodo
+syn region swiftLineComment start="//" end="$" contains=swiftComment,swiftTodo
 
-highlight default link swiftConditionStatement PreProc
-highlight default link swiftAvailability Normal
-highlight default link swiftAvailabilityArg Normal
-highlight default link swiftPlatforms Keyword
+syn match swiftDecimal /[+\-]\?\<\([0-9][0-9_]*\)\([.][0-9_]*\)\?\([eE][+\-]\?[0-9][0-9_]*\)\?\>/
+syn match swiftHex /[+\-]\?\<0x[0-9A-Fa-f][0-9A-Fa-f_]*\(\([.][0-9A-Fa-f_]*\)\?[pP][+\-]\?[0-9][0-9_]*\)\?\>/
+syn match swiftOct /[+\-]\?\<0o[0-7][0-7_]*\>/
+syn match swiftBin /[+\-]\?\<0b[01][01_]*\>/
 
-" Force vim to sync at least x lines. This solves the multiline comment not
-" being highlighted issue
-syn sync minlines=100
+syn match swiftOperator +\.\@<!\.\.\.\@!\|[/=\-+*%<>!&|^~]\@<!\(/[/*]\@![/=\-+*%<>!&|^~]*\|*/\@![/=\-+*%<>!&|^~]*\|->\@![/=\-+*%<>!&|^~]*\|[=+%<>!&|^~][/=\-+*%<>!&|^~]*\)+ skipwhite nextgroup=swiftTypeParameters
+syn match swiftOperator "\.\.[<.]" skipwhite nextgroup=swiftTypeParameters
+
+syn match swiftChar /'\([^'\\]\|\\\(["'tnr0\\]\|x[0-9a-fA-F]\{2}\|u[0-9a-fA-F]\{4}\|U[0-9a-fA-F]\{8}\)\)'/
+
+syn match swiftPreproc /#\(\<file\>\|\<line\>\|\<function\>\)/
+syn match swiftPreproc /^\s*#\(\<if\>\|\<else\>\|\<elseif\>\|\<endif\>\<error\>\|\<warning\>\|\)/
+syn region swiftPreprocFalse start="^\s*#\<if\>\s\+\<false\>" end="^\s*#\(\<else\>\|\<elseif\>\|\<endif\>\)"
+
+syn match swiftAttribute /@\<\w\+\>/ skipwhite nextgroup=swiftType
+
+syn keyword swiftTodo MARK TODO FIXME contained
+
+syn match swiftCastOp "\<is\>" skipwhite nextgroup=swiftType
+syn match swiftCastOp "\<as\>[!?]\?" skipwhite nextgroup=swiftType
+
+syn match swiftNilOps "??"
+
+syn region swiftReservedIdentifier oneline
+      \ start=/`/ end=/`/
+
+hi def link swiftImport Include
+hi def link swiftImportModule Title
+hi def link swiftImportComponent Identifier
+hi def link swiftKeyword Statement
+hi def link swiftMultiwordKeyword Statement
+hi def link swiftTypeDefinition Define
+hi def link swiftMultiwordTypeDefinition Define
+hi def link swiftType Type
+hi def link swiftTypePair Type
+hi def link swiftTypeName Function
+hi def link swiftConstraint Special
+hi def link swiftFuncDefinition Define
+hi def link swiftDefinitionModifier Define
+hi def link swiftInOutKeyword Define
+hi def link swiftFuncKeyword Function
+hi def link swiftFuncKeywordGeneral Function
+hi def link swiftVarDefinition Define
+hi def link swiftVarName Identifier
+hi def link swiftImplicitVarName Identifier
+hi def link swiftIdentifierKeyword Identifier
+hi def link swiftTypeDeclaration Delimiter
+hi def link swiftTypeParameters Delimiter
+hi def link swiftBoolean Boolean
+hi def link swiftString String
+hi def link swiftInterpolation Special
+hi def link swiftComment Comment
+hi def link swiftLineComment Comment
+hi def link swiftDecimal Number
+hi def link swiftHex Number
+hi def link swiftOct Number
+hi def link swiftBin Number
+hi def link swiftOperator Function
+hi def link swiftChar Character
+hi def link swiftLabel Operator
+hi def link swiftMutating Statement
+hi def link swiftPreproc PreCondit
+hi def link swiftPreprocFalse Comment
+hi def link swiftAttribute Type
+hi def link swiftTodo Todo
+hi def link swiftNil Constant
+hi def link swiftCastOp Operator
+hi def link swiftNilOps Operator
+hi def link swiftScope PreProc
 
 let b:current_syntax = "swift"
