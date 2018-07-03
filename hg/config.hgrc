@@ -9,8 +9,8 @@ revert--all=false
 
 # Set up some handy vimdiff merging.
 [merge-tools]
-vimdiff.executable = vimdiff
-vimdiff.args = -f -d $ouput -M $local $base $other -c "wincmd J" -c "set modifiable" -c "set write"
+vimdiff.executable = vim
+vimdiff.args = -d $base $local $output +close +close
 vimdiff.premerge = keep
 
 # Default aliases
