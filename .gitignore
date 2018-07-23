@@ -1,2 +1,3 @@
 !*.clang-format
 *.pyc
+vim/*.netrwhist

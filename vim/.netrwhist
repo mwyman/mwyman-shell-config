@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/mwyman/Source/Google/iGMM/google3/googlemac/iPhone/Shared/Audio'
-let g:netrw_dirhist_2='/Users/mwyman/.mwyman-shell-config/hg'
-let g:netrw_dirhist_3='/Users/mwyman/Source/Google/iGMM/google3/googlemac/iPhone/Maps/SDK/Nav/Views'
