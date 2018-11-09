@@ -56,6 +56,12 @@ _cd_hg_project() {
 
 # Function/command to change to the current git/mercurial repo "project" directory.
 cdproj() {
+  if [ -n "$1" ]; then
+    # If an argument is given, first change to that directory and find the project
+    # root from there.
+    cd "$1"
+  fi
+
   local GIT_ROOT=$(_git_root_directory)
   if [ -n "${GIT_ROOT}" ]; then
     _cd_git_project "${GIT_ROOT}"
