@@ -2,8 +2,7 @@ mwyman-shell-config
 ===================
 
 I've needed to recreate my bash shell profile more often than I care to, and
-decided that I should really setup a Github repo that would contain my shell
-setup.
+set up a Github repo that would contain my shell environment.
 
 # Automated Setup
 
