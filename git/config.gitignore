@@ -18,6 +18,8 @@
 *.swo
 .DS_Store
 *.clang-format
-*/xcuserdata/*
+*.xcworkspace
+*.xcuserdata
+*.xcuserstate
 .clangd
 
