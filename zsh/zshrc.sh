@@ -107,6 +107,8 @@ alias compile_swift_arm64='swiftc -sdk $(xcrun --sdk iphoneos --show-sdk-path) -
 alias compile_swift_armv7='swiftc -sdk $(xcrun --sdk iphoneos --show-sdk-path) -target armv7-apple-ios$(xcrun --sdk iphoneos --show-sdk-platform-version)'
 alias compile_swift_x64='swiftc -sdk $(xcrun --sdk iphonesimulator --show-sdk-path) -target x86_64-apple-ios$(xcrun --sdk iphonesimulator --show-sdk-platform-version)'
 
+alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 
 ###############################################################################
 # Oh-my-zsh stuff
