@@ -116,6 +116,7 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 
 # Theme to load
 ZSH_THEME="agnoster"
+ZSH_DISABLE_COMPFIX=true
 DEFAULT_USER="mwyman"
 DISABLE_AUTO_UPDATE="true"
 plugins=(git mercurial osx)
