@@ -14,9 +14,9 @@ from mercurial import ui as uimod
 cmdtable = {}
 command = registrar.command(cmdtable)
 
-CONFIG_SECTION='mjw'
+CONFIG_SECTION=b'mjw'
 
-@command('mjw', [], '[options]')
+@command(b'mjw', [], b'[options]')
 def mjw_main(ui, repo, **opts):
     """General extension method."""
     pass
