@@ -119,7 +119,7 @@ ZSH_THEME="agnoster"
 ZSH_DISABLE_COMPFIX=true
 DEFAULT_USER="mwyman"
 DISABLE_AUTO_UPDATE="true"
-plugins=(git mercurial osx)
+plugins=(git mercurial macos)
 
 github_setup() {
   local CURRENT_OS=$(uname)
