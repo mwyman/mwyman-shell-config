@@ -15,12 +15,6 @@ git clone https://github.com/mwyman/mwyman-shell-config.git ${GITHUB_SHELL_DEST}
 ${GITHUB_SHELL_DEST}/setup.py
 ```
 
-For jedi-vim support (Python autocomplete) you may also need to do:
-
-```bash
-(cd ${GITHUB_SHELL_DEST}/vim/bundle/jedi-vim; git submodule update --init)
-```
-
 # Manual Setup
 
 To configure your shell to use the Github configuration, add the following lines to the various configuration files.

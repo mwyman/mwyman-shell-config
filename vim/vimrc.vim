@@ -76,10 +76,6 @@ syntax enable
 set background=light
 colorscheme solarized
 
-" jedi-vim
-autocmd FileType python setlocal completeopt-=preview   " disable auto-doc window appearing
-"let g:jedi#completions_enabled = 0                     " uncomment to disable completion
-
 " vim-airline
 let g:airline_powerline_fonts = 1                       " make sure powerline fonts are disabled
 let g:airline#extensions#tabline#enabled = 1
