@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- encoding: utf8 -*-
 
 """
@@ -45,7 +45,7 @@ def ParseConfig(path):
       elif line.startswith("%% file:"):
         files.append(re.match(r'^%% file:\s+(.*)', line).group(1))
       else:
-        for key, value in vardict.iteritems():
+        for key, value in vardict.items():
           line = line.replace('%%{0}%%'.format(key), value)
         contents.append(line)
   while len(contents) and not contents[0].strip():  # Remove blank lines from the beginning
@@ -62,7 +62,7 @@ def UpdateFile(path, contentLines, marker, dryrun=False):
   """
   path = os.path.realpath(ExpandAll(path))
 
-  print 'Updating ~/%s...' % (os.path.relpath(path, USER_HOME))
+  print('Updating ~/%s...' % (os.path.relpath(path, USER_HOME)))
 
   beginComment = re.sub(r'<>', 'Begin', marker)
   endComment = re.sub(r'<>', 'End', marker)
@@ -92,9 +92,9 @@ def UpdateFile(path, contentLines, marker, dryrun=False):
     outlines.append(endComment)
 
   if dryrun:  # Write to standard output instead
-    print 'Update %s:' % (path)
+    print('Update %s:' % (path))
     sys.stdout.writelines(outlines)
-    print '\n\n'
+    print('\n\n')
   else:
     with open(path, 'w') as fp:
       fp.writelines(outlines)
