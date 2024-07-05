@@ -80,3 +80,4 @@ Add the following lines to your `~/.hgrc` file.
 %include <_path to repo>/hg/config.hgrc
 # End Github hg config
 ```
+
